@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Cat Stress Checker | Hill's Pet Nutrition</title>
+    <meta name="description" content="Is your cat ready for the holidays? Take this 2-minute check to find out if guests, decorations, and routine changes are stressing your cat.">
+    <meta property="og:title" content="Holiday Cat Stress Checker | Hill's Pet Nutrition">
+    <meta property="og:description" content="Is your cat ready for the holidays? Take this 2-minute quiz to assess your cat's holiday stress risk and learn how to protect their urinary health.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">Hill's<sup>®</sup> Pet Nutrition</div>
+    </header>
+
+    <main>
+        <!-- ===== LANDING SECTION ===== -->
+        <section id="landing">
+            <div class="hero">
+                <h1>The holidays are coming.<br>Is your cat ready?</h1>
+                <p class="subhead">Guests, decorations, and routine changes can stress your cat more than you think. Take this 2-minute check to find out.</p>
+                <button id="start-btn" class="btn-primary">Start the Holiday Stress Check</button>
+            </div>
+
+            <div class="stress-facts-grid">
+                <article class="fact-card fade-in-up">
+                    <div class="fact-icon">🎄</div>
+                    <h3>New decorations = new stressors</h3>
+                    <p>Rearranged furniture and unfamiliar objects can make your cat feel like their territory has been invaded.</p>
+                </article>
+                <article class="fact-card fade-in-up" style="animation-delay: 0.15s">
+                    <div class="fact-icon">🎁</div>
+                    <h3>Guests = social overload</h3>
+                    <p>Even well-meaning visitors can overwhelm a cat who thrives on routine.</p>
+                </article>
+                <article class="fact-card fade-in-up" style="animation-delay: 0.3s">
+                    <div class="fact-icon">🔔</div>
+                    <h3>Routine changes = anxiety</h3>
+                    <p>Different feeding times, louder evenings, and less quiet space can trigger a stress response.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== QUIZ SECTION ===== -->
+        <section id="quiz" style="display:none;">
+            <div class="gauge-wrapper">
+                <div class="ornament-frame">
+                    <div class="ornament-hook"></div>
+                    <div id="gauge-container">
+                        <svg viewBox="0 0 200 120" class="gauge-svg" aria-hidden="true">
+                            <!-- Gauge arc segments -->
+                            <path d="M 20,100 A 80,80 0 0,1 60,28" fill="none" stroke="#4CAF50" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M 62,27 A 80,80 0 0,1 100,20" fill="none" stroke="#FFC107" stroke-width="16" stroke-linecap="butt"/>
+                            <path d="M 100,20 A 80,80 0 0,1 138,27" fill="none" stroke="#FF9800" stroke-width="16" stroke-linecap="butt"/>
+                            <path d="M 140,28 A 80,80 0 0,1 180,100" fill="none" stroke="#E53935" stroke-width="16" stroke-linecap="round"/>
+                            <!-- Needle (pivot at 100, 100) -->
+                            <line id="gauge-needle" x1="100" y1="100" x2="100" y2="25" stroke="#F5F0E8" stroke-width="3" stroke-linecap="round" style="transform-origin: 100px 100px; transform: rotate(-90deg); transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);"/>
+                            <!-- Needle hub -->
+                            <circle cx="100" cy="100" r="6" fill="#D4A854"/>
+                        </svg>
+                        <div class="gauge-labels">
+                            <span>Calm</span>
+                            <span>Alert</span>
+                            <span>Stressed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress ornaments -->
+            <div id="progress-bar" class="progress-container">
+                <div class="progress-line"></div>
+                <div class="ornament active" aria-label="Question 1"></div>
+                <div class="ornament" aria-label="Question 2"></div>
+                <div class="ornament" aria-label="Question 3"></div>
+                <div class="ornament" aria-label="Question 4"></div>
+                <div class="ornament" aria-label="Question 5"></div>
+                <div class="ornament" aria-label="Question 6"></div>
+                <div class="ornament" aria-label="Question 7"></div>
+                <div class="ornament" aria-label="Question 8"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div id="question-container" class="question-card">
+                <div id="question-number" class="question-number">Question 1 of 8</div>
+                <h2 id="question-text" class="question-text">Loading question...</h2>
+                <div id="answers-container" class="answers-grid">
+                    <!-- Dynamically rendered by JS -->
+                </div>
+            </div>
+
+            <!-- "Did You Know?" Interstitial Overlay -->
+            <div id="dyk-overlay" class="interstitial-overlay" style="display:none;">
+                <div class="interstitial-card">
+                    <div class="interstitial-icon">❄️</div>
+                    <h3>Did You Know?</h3>
+                    <p id="dyk-text"></p>
+                    <button id="dyk-close" class="btn-secondary">Got It</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== RESULTS SECTION ===== -->
+        <section id="results" style="display:none;">
+            <div class="results-top">
+                <div class="ornament-frame results-ornament-frame">
+                    <div class="ornament-hook"></div>
+                    <div id="results-gauge-container">
+                        <svg viewBox="0 0 200 120" class="gauge-svg" aria-hidden="true">
+                            <path d="M 20,100 A 80,80 0 0,1 60,28" fill="none" stroke="#4CAF50" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M 62,27 A 80,80 0 0,1 100,20" fill="none" stroke="#FFC107" stroke-width="16" stroke-linecap="butt"/>
+                            <path d="M 100,20 A 80,80 0 0,1 138,27" fill="none" stroke="#FF9800" stroke-width="16" stroke-linecap="butt"/>
+                            <path d="M 140,28 A 80,80 0 0,1 180,100" fill="none" stroke="#E53935" stroke-width="16" stroke-linecap="round"/>
+                            <line id="results-gauge-needle" x1="100" y1="100" x2="100" y2="25" stroke="#F5F0E8" stroke-width="3" stroke-linecap="round" style="transform-origin: 100px 100px; transform: rotate(-90deg); transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);"/>
+                            <circle cx="100" cy="100" r="6" fill="#D4A854"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="result-badge" class="badge">
+                    <span class="emoji"></span>
+                    <span class="name">Result</span>
+                </div>
+            </div>
+
+            <div class="results-content">
+                <h2 id="result-headline">Your Cat's Holiday Stress Risk</h2>
+                <p id="result-description">Results loading...</p>
+
+                <!-- Tips list -->
+                <ul id="result-tips" class="tips-list"></ul>
+
+                <!-- Behavior Reframe Banner -->
+                <div id="reframe-banner" class="reframe-banner" style="display:none;">
+                    <span class="reframe-paw">🐾</span>
+                    <p>If your cat pees outside the litter box, don't get angry. They may be telling you they're hurting.</p>
+                </div>
+
+                <!-- FIC Education Panel (Collapsible) -->
+                <div id="fic-panel" class="fic-panel" style="display:none;">
+                    <button id="fic-header" class="fic-header" aria-expanded="false">
+                        <span>Understanding FIC &amp; Stress</span>
+                        <span class="fic-arrow">▾</span>
+                    </button>
+                    <div id="fic-body" class="fic-body">
+                        <div id="fic-content" class="fic-content"></div>
+                    </div>
+                </div>
+
+                <!-- Vet Deferral -->
+                <p class="vet-deferral">
+                    Your veterinarian can help you understand your cat's unique stress triggers and recommend a nutrition plan tailored to their needs. Consider scheduling a visit before the holidays.
+                </p>
+
+                <!-- CTAs -->
+                <div class="results-actions">
+                    <a href="https://www.hillspet.com/pet-food-finder" id="cta-nutrition" class="btn-primary" target="_blank" rel="noopener">Explore Nutrition Solutions</a>
+                    <a href="https://www.hillspet.com/where-to-buy" id="cta-vet" class="btn-secondary" target="_blank" rel="noopener">Talk to Your Vet</a>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <h3>Share Your Results</h3>
+                    <div class="share-buttons">
+                        <button id="share-facebook" class="share-btn" aria-label="Share on Facebook">📘 Facebook</button>
+                        <button id="share-twitter" class="share-btn" aria-label="Share on X/Twitter">🐦 Twitter/X</button>
+                        <button id="share-email" class="share-btn" aria-label="Share via Email">✉️ Email</button>
+                        <button id="copy-link" class="share-btn" aria-label="Copy link">🔗 Copy Link</button>
+                    </div>
+                </div>
+
+                <!-- Email Capture -->
+                <div class="email-capture">
+                    <h3>Get Your Free Holiday Stress Survival Guide</h3>
+                    <p>Delivered to your inbox before the season starts.</p>
+                    <form id="email-form">
+                        <input id="email-input" type="email" placeholder="Enter your email" required aria-label="Email address">
+                        <button type="submit" class="btn-primary btn-sm">Subscribe</button>
+                    </form>
+                    <p id="email-form-message"></p>
+                </div>
+
+                <button id="retake-btn" class="btn-retake">↺ Retake Quiz</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-brand">Hill's<sup>®</sup> Pet Nutrition</div>
+        <p class="disclaimer">This tool is for educational purposes only. Always consult your veterinarian for medical advice.</p>
+        <div class="footer-links">
+            <a href="https://www.hillspet.com/terms-and-conditions" target="_blank" rel="noopener">Terms & Conditions</a>
+            <span>·</span>
+            <a href="https://www.colgatepalmolive.com/en-us/legal-privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
