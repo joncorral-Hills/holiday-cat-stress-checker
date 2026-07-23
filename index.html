@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Cat Stress Checker | Hill's Pet Nutrition</title>
-    <meta name="description" content="Is your cat ready for the holidays? Take this 2-minute check to find out if guests, decorations, and routine changes are stressing your cat.">
-    <meta property="og:title" content="Holiday Cat Stress Checker | Hill's Pet Nutrition">
-    <meta property="og:description" content="Is your cat ready for the holidays? Take this 2-minute quiz to assess your cat's holiday stress risk and learn how to protect their urinary health.">
+    <title>Cat Stress Check | Hill's Pet Nutrition</title>
+    <meta name="description" content="Is your cat stressed? Take this 2-minute check to find out if changes in your home might be affecting your cat's wellbeing.">
+    <meta property="og:title" content="Cat Stress Check | Hill's Pet Nutrition">
+    <meta property="og:description" content="Take this 2-minute quiz to assess your cat's stress risk and learn how to protect their urinary health.">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts -->
@@ -25,21 +25,21 @@
         <!-- ===== LANDING SECTION ===== -->
         <section id="landing">
             <div class="hero">
-                <h1>The holidays are coming.<br>Is your cat ready?</h1>
-                <p class="subhead">Guests, decorations, and routine changes can stress your cat more than you think. Take this 2-minute check to find out.</p>
-                <button id="start-btn" class="btn-primary">Start the Holiday Stress Check</button>
+                <h1>Is your cat<br>more stressed than you think?</h1>
+                <p class="subhead">Changes at home — new people, rearranged spaces, broken routines — can stress your cat in ways you might not notice. Take this 2-minute check to find out.</p>
+                <button id="start-btn" class="btn-primary">Start the Stress Check</button>
             </div>
 
             <div class="stress-facts-grid">
                 <article class="fact-card fade-in-up">
-                    <div class="fact-icon">🎄</div>
-                    <h3>New decorations = new stressors</h3>
+                    <div class="fact-icon">🛋️</div>
+                    <h3>New surroundings = new stressors</h3>
                     <p>Rearranged furniture and unfamiliar objects can make your cat feel like their territory has been invaded.</p>
                 </article>
                 <article class="fact-card fade-in-up" style="animation-delay: 0.15s">
-                    <div class="fact-icon">🎁</div>
-                    <h3>Guests = social overload</h3>
-                    <p>Even well-meaning visitors can overwhelm a cat who thrives on routine.</p>
+                    <div class="fact-icon">👥</div>
+                    <h3>Visitors = social overload</h3>
+                    <p>Even well-meaning guests can overwhelm a cat who thrives on routine.</p>
                 </article>
                 <article class="fact-card fade-in-up" style="animation-delay: 0.3s">
                     <div class="fact-icon">🔔</div>
@@ -52,8 +52,7 @@
         <!-- ===== QUIZ SECTION ===== -->
         <section id="quiz" style="display:none;">
             <div class="gauge-wrapper">
-                <div class="ornament-frame">
-                    <div class="ornament-hook"></div>
+                <div class="gauge-frame">
                     <div id="gauge-container">
                         <svg viewBox="0 0 200 120" class="gauge-svg" aria-hidden="true">
                             <!-- Gauge arc segments -->
@@ -75,17 +74,17 @@
                 </div>
             </div>
 
-            <!-- Progress ornaments -->
+            <!-- Progress dots -->
             <div id="progress-bar" class="progress-container">
                 <div class="progress-line"></div>
-                <div class="ornament active" aria-label="Question 1"></div>
-                <div class="ornament" aria-label="Question 2"></div>
-                <div class="ornament" aria-label="Question 3"></div>
-                <div class="ornament" aria-label="Question 4"></div>
-                <div class="ornament" aria-label="Question 5"></div>
-                <div class="ornament" aria-label="Question 6"></div>
-                <div class="ornament" aria-label="Question 7"></div>
-                <div class="ornament" aria-label="Question 8"></div>
+                <div class="step-dot active" aria-label="Question 1"></div>
+                <div class="step-dot" aria-label="Question 2"></div>
+                <div class="step-dot" aria-label="Question 3"></div>
+                <div class="step-dot" aria-label="Question 4"></div>
+                <div class="step-dot" aria-label="Question 5"></div>
+                <div class="step-dot" aria-label="Question 6"></div>
+                <div class="step-dot" aria-label="Question 7"></div>
+                <div class="step-dot" aria-label="Question 8"></div>
             </div>
 
             <!-- Question Card -->
@@ -100,7 +99,7 @@
             <!-- "Did You Know?" Interstitial Overlay -->
             <div id="dyk-overlay" class="interstitial-overlay" style="display:none;">
                 <div class="interstitial-card">
-                    <div class="interstitial-icon">❄️</div>
+                    <div class="interstitial-icon">💡</div>
                     <h3>Did You Know?</h3>
                     <p id="dyk-text"></p>
                     <button id="dyk-close" class="btn-secondary">Got It</button>
@@ -111,8 +110,7 @@
         <!-- ===== RESULTS SECTION ===== -->
         <section id="results" style="display:none;">
             <div class="results-top">
-                <div class="ornament-frame results-ornament-frame">
-                    <div class="ornament-hook"></div>
+                <div class="gauge-frame results-gauge-frame">
                     <div id="results-gauge-container">
                         <svg viewBox="0 0 200 120" class="gauge-svg" aria-hidden="true">
                             <path d="M 20,100 A 80,80 0 0,1 60,28" fill="none" stroke="#4CAF50" stroke-width="16" stroke-linecap="round"/>
@@ -132,7 +130,7 @@
             </div>
 
             <div class="results-content">
-                <h2 id="result-headline">Your Cat's Holiday Stress Risk</h2>
+                <h2 id="result-headline">Your Cat's Stress Risk</h2>
                 <p id="result-description">Results loading...</p>
 
                 <!-- Tips list -->
@@ -157,7 +155,7 @@
 
                 <!-- Vet Deferral -->
                 <p class="vet-deferral">
-                    Your veterinarian can help you understand your cat's unique stress triggers and recommend a nutrition plan tailored to their needs. Consider scheduling a visit before the holidays.
+                    Your veterinarian can help you understand your cat's unique stress triggers and recommend a nutrition plan tailored to their needs. Consider scheduling a visit soon.
                 </p>
 
                 <!-- CTAs -->
@@ -179,8 +177,8 @@
 
                 <!-- Email Capture -->
                 <div class="email-capture">
-                    <h3>Get Your Free Holiday Stress Survival Guide</h3>
-                    <p>Delivered to your inbox before the season starts.</p>
+                    <h3>Get Your Free Cat Stress Survival Guide</h3>
+                    <p>Tips and insights delivered straight to your inbox.</p>
                     <form id="email-form">
                         <input id="email-input" type="email" placeholder="Enter your email" required aria-label="Email address">
                         <button type="submit" class="btn-primary btn-sm">Subscribe</button>

@@ -1,5 +1,5 @@
 /**
- * @fileoverview App logic for the Holiday Cat Stress Checker Quiz.
+ * @fileoverview App logic for the Cat Stress Check Quiz.
  * Handles state, DOM updates, animations, and result calculation.
  */
 
@@ -8,32 +8,32 @@
 const questions = [
   {
     id: 1,
-    text: "How many guests will visit your home this holiday season?",
+    text: "How often do guests or visitors come to your home?",
     options: [
-      { emoji: "🏠", text: "None — quiet holidays for us", value: 0 },
-      { emoji: "👫", text: "Just a few (1–3 people)", value: 1 },
-      { emoji: "👨‍👩‍👧‍👦", text: "A fair number (4–8 people)", value: 2 },
-      { emoji: "🎉", text: "It's a full house (8+ people)", value: 3 }
+      { emoji: "🏠", text: "Rarely — we keep to ourselves", value: 0 },
+      { emoji: "👫", text: "Occasionally (a few times a month)", value: 1 },
+      { emoji: "👨‍👩‍👧‍👦", text: "Frequently (weekly or more)", value: 2 },
+      { emoji: "🎉", text: "Constantly — our home is a social hub", value: 3 }
     ]
   },
   {
     id: 2,
-    text: "Will your daily routine (feeding, play, sleep times) change during the holidays?",
+    text: "Has your daily routine (feeding, play, sleep times) changed recently or is it about to?",
     options: [
-      { emoji: "⏰", text: "Not at all — same schedule", value: 0 },
-      { emoji: "🔄", text: "A little — minor shifts", value: 1 },
-      { emoji: "📅", text: "Quite a bit — things get hectic", value: 2 },
-      { emoji: "🌀", text: "Completely different routine", value: 3 }
+      { emoji: "⏰", text: "Not at all — same schedule as always", value: 0 },
+      { emoji: "🔄", text: "A little — minor shifts here and there", value: 1 },
+      { emoji: "📅", text: "Quite a bit — things have been hectic", value: 2 },
+      { emoji: "🌀", text: "Completely different from our normal routine", value: 3 }
     ]
   },
   {
     id: 3,
-    text: "Will you be rearranging furniture or decorating near your cat's favorite spots?",
+    text: "Have you recently rearranged furniture or changed the layout near your cat's favorite spots?",
     options: [
-      { emoji: "✅", text: "No changes planned", value: 0 },
-      { emoji: "🎄", text: "Minor decorations nearby", value: 1 },
-      { emoji: "🪟", text: "Major rearranging happening", value: 2 },
-      { emoji: "😬", text: "Their spot IS the tree spot", value: 3 }
+      { emoji: "✅", text: "No changes — everything is the same", value: 0 },
+      { emoji: "🛋️", text: "Minor changes in a nearby room", value: 1 },
+      { emoji: "📦", text: "Major rearranging or renovation", value: 2 },
+      { emoji: "😬", text: "Their favorite spot was moved or removed", value: 3 }
     ]
   },
   {
@@ -91,16 +91,16 @@ const questions = [
 const resultTiers = [
   {
     id: 'low',
-    name: 'Holly Jolly Kitty',
+    name: 'Cool & Collected',
     emoji: '🟢',
     scoreRange: [0, 6],
     gaugeAngle: -60,
-    headline: 'Your Cat\'s Holiday Stress Risk: Low',
-    description: 'Great news! Your cat\'s holiday environment looks relatively calm. Even so, keeping a few simple habits in place can help your cat cruise through the season stress-free.',
+    headline: 'Your Cat\'s Stress Risk: Low',
+    description: 'Great news! Your cat\'s environment looks relatively calm. Even so, keeping a few simple habits in place can help your cat stay comfortable and stress-free.',
     tips: [
       'Maintain consistent feeding and play schedules, even on busy days.',
       'Keep at least one quiet room accessible as your cat\'s safe haven.',
-      'Introduce any new decorations gradually, giving your cat time to adjust.'
+      'Introduce any changes to your home gradually, giving your cat time to adjust.'
     ],
     showFIC: false,
     showReframe: false,
@@ -108,14 +108,14 @@ const resultTiers = [
   },
   {
     id: 'moderate',
-    name: 'Tinsel Tension',
+    name: 'On Edge',
     emoji: '🟡',
     scoreRange: [7, 12],
     gaugeAngle: -20,
-    headline: 'Your Cat\'s Holiday Stress Risk: Moderate',
-    description: 'Your cat may experience some holiday stress. Cats are creatures of habit, and even small routine changes can build up. Watch for signs like hiding, appetite changes, or litter box avoidance.',
+    headline: 'Your Cat\'s Stress Risk: Moderate',
+    description: 'Your cat may be experiencing some stress. Cats are creatures of habit, and even small routine changes can build up. Watch for signs like hiding, appetite changes, or litter box avoidance.',
     tips: [
-      'Create a dedicated quiet zone away from holiday activity.',
+      'Create a dedicated quiet zone away from household activity.',
       'Watch for changes in eating, grooming, or litter box habits.',
       'Consider asking your veterinarian about stress-supportive nutrition.'
     ],
@@ -126,32 +126,32 @@ const resultTiers = [
   },
   {
     id: 'high',
-    name: 'Jingle Bell Jitters',
+    name: 'Stressed Out',
     emoji: '🟠',
     scoreRange: [13, 18],
     gaugeAngle: 25,
-    headline: 'Your Cat\'s Holiday Stress Risk: High',
-    description: 'Your cat\'s holiday environment has several stress triggers. Cats in high-stress situations may develop feline idiopathic cystitis (FIC), which can make urinating painful — and lead them to avoid the litter box altogether.',
+    headline: 'Your Cat\'s Stress Risk: High',
+    description: 'Your cat\'s environment has several stress triggers. Cats in high-stress situations may develop feline idiopathic cystitis (FIC), which can make urinating painful — and lead them to avoid the litter box altogether.',
     tips: [
-      'Set up a safe room with food, water, litter, and a cozy bed before guests arrive.',
-      'Keep holiday noise levels in check — music, fireworks, and crowds all add up.',
+      'Set up a safe room with food, water, litter, and a cozy bed that your cat can retreat to.',
+      'Keep noise levels in check — loud music, construction, and frequent visitors all add up.',
       'Talk to your veterinarian about therapeutic nutrition that may help manage stress-related urinary issues.'
     ],
-    ficText: '<strong>The Stress → FIC → Litter Box Connection</strong><br><br>Feline idiopathic cystitis (FIC) originates in the nervous system, not the bladder. Cats with FIC have a sensitized nervous system that overreacts to stress, causing painful bladder inflammation.<br><br>Holiday triggers — like guests, rearranged furniture, or routine disruptions — can set off this response. When the bladder is inflamed and painful, your cat may associate the litter box with that pain and start avoiding it.<br><br>Therapeutic foods specifically formulated for urinary health have been shown to help reduce the incidence of FIC. Your veterinarian can recommend the right nutrition plan for your cat.',
+    ficText: '<strong>The Stress → FIC → Litter Box Connection</strong><br><br>Feline idiopathic cystitis (FIC) originates in the nervous system, not the bladder. Cats with FIC have a sensitized nervous system that overreacts to stress, causing painful bladder inflammation.<br><br>Common triggers — like guests, rearranged furniture, or routine disruptions — can set off this response. When the bladder is inflamed and painful, your cat may associate the litter box with that pain and start avoiding it.<br><br>Therapeutic foods specifically formulated for urinary health have been shown to help reduce the incidence of FIC. Your veterinarian can recommend the right nutrition plan for your cat.',
     showFIC: true,
     showReframe: true,
     ctaStyle: 'strong'
   },
   {
     id: 'critical',
-    name: 'Silent Night SOS',
+    name: 'Red Alert',
     emoji: '🔴',
     scoreRange: [19, 24],
     gaugeAngle: 70,
-    headline: 'Your Cat\'s Holiday Stress Risk: Very High',
-    description: 'Your cat\'s holiday stress risk is very high. Multiple factors in your environment may trigger or worsen feline idiopathic cystitis (FIC). The good news? There are steps you can take right now — before the holidays arrive.',
+    headline: 'Your Cat\'s Stress Risk: Very High',
+    description: 'Your cat\'s stress risk is very high. Multiple factors in your environment may trigger or worsen feline idiopathic cystitis (FIC). The good news? There are steps you can take right now to help.',
     tips: [
-      'Schedule a veterinary visit now, before the holiday season begins.',
+      'Schedule a veterinary visit as soon as possible.',
       'Create a dedicated, quiet sanctuary room your cat can retreat to at any time.',
       'Ensure each cat has their own litter box, food, and water — plus one extra of each.',
       'Ask your vet about therapeutic nutrition designed to help manage stress-related urinary conditions.'
@@ -164,8 +164,8 @@ const resultTiers = [
 ];
 
 const didYouKnowFacts = {
-  2: 'Cats with FIC have a sensitized nervous system that can overreact to environmental changes — like rearranged furniture or new holiday decorations. Even small changes to their territory can trigger a stress response.', // Index 2 is after Q3
-  5: 'Sharing resources — like litter boxes — with other cats can be a significant source of chronic stress. Veterinary behaviorists recommend providing one litter box per cat, plus one extra, to help reduce tension.'  // Index 5 is after Q6
+  2: 'Cats with FIC have a sensitized nervous system that can overreact to environmental changes — like rearranged furniture or new objects in their space. Even small changes to their territory can trigger a stress response.',
+  5: 'Sharing resources — like litter boxes — with other cats can be a significant source of chronic stress. Veterinary behaviorists recommend providing one litter box per cat, plus one extra, to help reduce tension.'
 };
 
 // --- APP STATE ---
@@ -383,16 +383,17 @@ function updateGauge(score, isResult = false, explicitAngle = null) {
  * @param {number} index - The current active question index.
  */
 function updateProgress(index) {
-  const ornaments = document.querySelectorAll('#progress-bar .ornament');
-  ornaments.forEach((ornament, i) => {
-    ornament.classList.remove('active', 'completed');
+  const dots = document.querySelectorAll('#progress-bar .step-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active', 'completed');
     if (i < index) {
-      ornament.classList.add('completed');
+      dot.classList.add('completed');
     } else if (i === index) {
-      ornament.classList.add('active');
+      dot.classList.add('active');
     }
   });
 }
+
 
 /**
  * Calculates final tier and displays the results section.
@@ -488,38 +489,7 @@ function handleEmailSubmit(e) {
   }
 }
 
-/**
- * Generates falling snowflakes via CSS animations.
- */
-function createSnowflakes() {
-  // Respect user preference for reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return; 
-  }
-  
-  for (let i = 0; i < 50; i++) {
-    const flake = document.createElement('div');
-    flake.classList.add('snowflake');
-    flake.style.position = 'fixed';
-    flake.style.width = (Math.random() * 3 + 2) + 'px';
-    flake.style.height = flake.style.width;
-    flake.style.backgroundColor = '#FFF';
-    flake.style.borderRadius = '50%';
-    flake.style.left = Math.random() * 100 + 'vw';
-    flake.style.top = '-10px';
-    flake.style.pointerEvents = 'none';
-    flake.style.zIndex = '9999';
-    flake.style.opacity = (Math.random() * 0.5 + 0.3).toString();
-    
-    // Random duration between 8s and 15s
-    const duration = Math.random() * 7 + 8;
-    // Random delay between 0s and 10s
-    const delay = Math.random() * 10;
-    
-    flake.style.animation = `snowfall ${duration}s linear ${delay}s infinite`;
-    document.body.appendChild(flake);
-  }
-}
+// Snowflake generator removed — no seasonal animations
 
 // --- SHARE FUNCTIONS ---
 
@@ -559,7 +529,6 @@ async function copyPageLink() {
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize UI
-  createSnowflakes();
   showSection('landing');
 
   // Event Binding
